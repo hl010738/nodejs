@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--当这个文件运行在nodejs的服务器时，引入socket.io 该路径是socket.io底层的映射-->
+    <!--如果没有运行在nodejs服务器时，可以使用CDN方式引入-->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script type="text/javascript">
+        const socket = io("localhost:3000");
+
+        socket.on("message", (message) => {
+            console.log("message from server: " + message);
+        });
+
+        socket.on("disconnect", () => {
+            console.log("disconnect");
+        });
+
+        // 响应自定义事件event1
+        socket.on("event1", (message) => {
+            console.log("message of event1: " + message);
+
+            // 发送自定义事件event2
+            socket.emit("event2", {aaa: 111, bbb: 222});
+        });
+
+        socket.emit("broadcastClient", "broadcastClient data");
+
+        socket.on("broadcastServer", (data) => {
+            console.log(data);
+        });
+
+    </script>
+
+
+</head>
+<body>
+
+</body>
+</html>
