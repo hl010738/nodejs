@@ -1,0 +1,1 @@
+["aaa", "bbb", "ccc", "ddd"].forEach(i => console.log(i));
