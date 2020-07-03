@@ -18,6 +18,7 @@ app.use(async function func2(ctx, next) {
 
 app.use(async function func3(ctx, next) {
     console.log("func3 start");
+    // 这里后面已经没有需要调用的函数，直接返回
     await next();
     console.log("func3 end");
 });
